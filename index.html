@@ -603,17 +603,20 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-areas:
-                "top    mascot"
-                "obsess vals";
+                "top      mascot"
+                "bodytxt  bodytxt"
+                "obsess   obsess"
+                "vals     vals";
             column-gap: 5rem;
             row-gap: 2.5rem;
             position: relative;
             z-index: 2;
         }
-        .about-top        { grid-area: top;    display: flex; flex-direction: column; gap: 1.5rem; align-self: center; }
-        .about-visual     { grid-area: mascot; align-self: center; }
-        .about-obsession  { grid-area: obsess; align-self: center; }
-        .values           { grid-area: vals;   align-self: center; display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
+        .about-top       { grid-area: top;     display: flex; flex-direction: column; gap: 1rem; align-self: center; }
+        .about-visual    { grid-area: mascot;  align-self: center; justify-self: center; }
+        .about-body-wrap { grid-area: bodytxt; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .about-obsession { grid-area: obsess; }
+        .values          { grid-area: vals;    display: grid; grid-template-columns: repeat(4,1fr); gap: .9rem; }
 
         .about-title {
             font-family: 'Passion One', sans-serif;
@@ -1007,16 +1010,18 @@
             .tab-btn    { font-size: .9rem; padding: .8rem 1.1rem; white-space: nowrap; }
             .menu-grid  { grid-template-columns: 1fr; }
 
-            /* About — 2×2 collapses to mobile grid */
+            /* About — mobile: mascot beside heading, rest stacks */
             .about-inner  {
                 grid-template-columns: 3fr 2fr;
                 grid-template-areas:
-                    "top    mascot"
-                    "obsess obsess"
-                    "vals   vals";
+                    "top     mascot"
+                    "bodytxt bodytxt"
+                    "obsess  obsess"
+                    "vals    vals";
                 column-gap: 1rem;
                 row-gap: 1.5rem;
             }
+            .about-body-wrap { grid-template-columns: 1fr; gap: 1rem; }
             .about-mascot { max-width: 150px; margin: 0; }
             .about-glow   { display: none; }
             .chef-quote   { display: none; }
@@ -1164,19 +1169,13 @@
 <section class="about-sec" id="about">
     <div class="about-inner">
 
-        <!-- TOP LEFT: label + TWO BROTHERS + body -->
+        <!-- TOP LEFT: label + TWO BROTHERS -->
         <div class="about-top rv">
             <div class="sec-label">Our Story</div>
             <h2 class="about-title">
                 TWO<br>
                 <span class="yb">BROTHERS.</span>
             </h2>
-            <p class="about-body">
-                It started with a cast iron pan, a block of fresh beef, and a bet. Two brothers — one with a chef's hat, one with a cap — decided that <strong>the perfect smash burger didn't exist yet.</strong> So they made it.
-            </p>
-            <p class="about-body">
-                We source fresh, never-frozen beef every single day. We bake our own brioche buns. We make every sauce from scratch. We don't cut corners — <strong>we smash them.</strong>
-            </p>
         </div>
 
         <!-- TOP RIGHT: mascot -->
@@ -1188,7 +1187,13 @@
             </div>
         </div>
 
-        <!-- BOTTOM LEFT: ONE OBSESSION -->
+        <!-- BODY TEXT: full-width row -->
+        <div class="about-body-wrap rv">
+            <p class="about-body">It started with a cast iron pan, a block of fresh beef, and a bet. Two brothers — one with a chef's hat, one with a cap — decided that <strong>the perfect smash burger didn't exist yet.</strong> So they made it.</p>
+            <p class="about-body">We source fresh, never-frozen beef every single day. We bake our own brioche buns. We make every sauce from scratch. We don't cut corners — <strong>we smash them.</strong></p>
+        </div>
+
+        <!-- ONE OBSESSION: full-width -->
         <div class="about-obsession rv rv-d1">
             <h2 class="about-title">
                 ONE<br>
