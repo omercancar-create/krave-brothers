@@ -1003,7 +1003,8 @@
             .menu-grid  { grid-template-columns: 1fr; }
 
             /* About — mascot floats top-right, text flows full width */
-            .about-inner   { grid-template-columns: 1fr; position: relative; gap: 1.5rem; }
+            .about-inner   { grid-template-columns: 1fr; align-items: stretch; position: relative; gap: 1.5rem; }
+            .about-content { width: 100%; }
             .about-visual  { position: absolute; top: 0; right: 0; width: 130px; order: 0; }
             .about-mascot  { max-width: 130px; }
             .about-title   { font-size: clamp(2.5rem, 10vw, 4rem); padding-right: 140px; }
