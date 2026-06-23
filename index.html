@@ -541,7 +541,7 @@
         }
         .card-num {
             position: absolute;
-            top: 1.8rem; right: 1rem;
+            top: 1rem; right: 1rem;
             font-family: 'Passion One', sans-serif;
             font-weight: 900;
             font-size: 4rem;
@@ -1044,11 +1044,11 @@
 <div class="mob-menu" id="mobMenu">
     <button class="mob-close" id="mobClose">✕</button>
     <ul class="mob-links">
-        <li><a href="#menu" onclick="closeMob()">Menu</a></li>
+        <li><a href="menu.html" onclick="closeMob()">Menu</a></li>
         <li><a href="#about" onclick="closeMob()">About</a></li>
         <li><a href="#location" onclick="closeMob()">Location</a></li>
     </ul>
-    <a href="#location" class="btn-y" onclick="closeMob()">Order Now →</a>
+    <a href="menu.html" class="btn-y" onclick="closeMob()">Menu →</a>
 </div>
 
 <!-- NAV -->
@@ -1058,11 +1058,11 @@
             <img src="./Brand Assets 2.0/logo-cows-on-text-2k-Photoroom.png" alt="Krave Brothers" class="nav-logo">
         </a>
         <ul class="nav-links">
-            <li><a href="#menu">Menu</a></li>
+            <li><a href="menu.html">Menu</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#location">Location</a></li>
             <li><a href="tel:0391234567">(03) 9123 4567</a></li>
-            <li><a href="#location" class="nav-cta">Order Now →</a></li>
+            <li><a href="menu.html" class="nav-cta">Menu →</a></li>
         </ul>
         <button class="nav-ham" id="ham" aria-label="Open menu">
             <span></span><span></span><span></span>
@@ -1090,7 +1090,7 @@
             </p>
 
             <div class="hero-ctas">
-                <a href="#menu" class="btn-y">See Our Menu ↓</a>
+                <a href="#about" class="btn-y">Our Story ↓</a>
                 <a href="#location" class="btn-o">Find Us →</a>
             </div>
 
@@ -1144,167 +1144,6 @@
         <span class="marquee-item">ORDER NOW <span class="marquee-dot"></span></span>
     </div>
 </div>
-
-<!-- MENU -->
-<section class="menu-sec" id="menu">
-    <div class="menu-hd rv">
-        <div class="sec-label sec-label-b">What We're Serving</div>
-        <h2 class="sec-title" style="color:var(--blue)">THE<br><span style="color:var(--blue)">MENU</span></h2>
-    </div>
-
-    <div class="menu-tabs">
-        <button class="tab-btn active" data-tab="burgers">🍔 Burgers</button>
-        <button class="tab-btn" data-tab="sides">🍟 Sides</button>
-        <button class="tab-btn" data-tab="drinks">🥤 Drinks</button>
-    </div>
-
-    <!-- BURGERS -->
-    <div class="tab-panel active" id="tab-burgers">
-        <div class="menu-grid">
-            <div class="card rv">
-                <div class="card-badge">Fan Fav</div>
-                <div class="card-num">01</div>
-                <div class="card-name">The OG Smash</div>
-                <div class="card-desc">The classic that started it all. Crispy caramelized edges, American cheese, dill pickles, and our secret smash sauce on a toasted bun. No notes.</div>
-                <div class="card-foot">
-                    <div class="card-price">$9.99</div>
-                </div>
-            </div>
-
-            <div class="card rv rv-d1">
-                <div class="card-num">02</div>
-                <div class="card-name">Double Trouble</div>
-                <div class="card-desc">Two perfectly smashed patties, double American cheese, diced white onions, mustard, and comeback sauce. You already know you're ordering two.</div>
-                <div class="card-foot">
-                    <div class="card-price">$13.99</div>
-                </div>
-            </div>
-
-            <div class="card rv rv-d2">
-                <div class="card-badge">Signature</div>
-                <div class="card-num">03</div>
-                <div class="card-name">Krave Special</div>
-                <div class="card-desc">Two smash patties, gruyère, caramelized onions, arugula, truffle aioli, and a brioche bun we baked this morning. This one is art.</div>
-                <div class="card-foot">
-                    <div class="card-price">$15.99</div>
-                </div>
-            </div>
-
-            <div class="card rv rv-d3">
-                <div class="card-num">04</div>
-                <div class="card-name">The Smoky Brother</div>
-                <div class="card-desc">Smoked gouda, crispy thick-cut bacon, chipotle mayo, jalapeño rings, and a smash patty that slaps. Smoky, rich, absolutely filthy.</div>
-                <div class="card-foot">
-                    <div class="card-price">$14.99</div>
-                </div>
-            </div>
-
-            <div class="card rv rv-d1">
-                <div class="card-badge">🔥 Spicy</div>
-                <div class="card-num">05</div>
-                <div class="card-name">The Angry Bird</div>
-                <div class="card-desc">Pepper jack, fresh jalapeños, pickled habanero, sriracha honey drizzle, and cooling slaw. Not for the timid. Don't say we didn't warn you.</div>
-                <div class="card-foot">
-                    <div class="card-price">$13.99</div>
-                </div>
-            </div>
-
-            <div class="card rv rv-d2">
-                <div class="card-num">06</div>
-                <div class="card-name">The Mushy</div>
-                <div class="card-desc">Sautéed wild mushrooms, Swiss cheese, garlic aioli, caramelized onions, fresh thyme. For the ones who know what they're doing.</div>
-                <div class="card-foot">
-                    <div class="card-price">$14.49</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SIDES -->
-    <div class="tab-panel" id="tab-sides">
-        <div class="menu-grid">
-            <div class="card rv">
-                <div class="card-badge">Must Try</div>
-                <div class="card-num">01</div>
-                <div class="card-name">Smash Fries</div>
-                <div class="card-desc">Hand-cut, double-fried until shatteringly crisp, tossed in our secret seasoning blend. The best fries you've ever had — we're calling it.</div>
-                <div class="card-foot">
-                    <div class="card-price">$4.99</div>
-                </div>
-            </div>
-
-            <div class="card rv rv-d1">
-                <div class="card-num">02</div>
-                <div class="card-name">Cheese Fries</div>
-                <div class="card-desc">Our smash fries absolutely drowning in homemade cheddar cheese sauce with a kick of hot sauce. Catch the drip.</div>
-                <div class="card-foot">
-                    <div class="card-price">$6.99</div>
-                </div>
-            </div>
-
-            <div class="card rv rv-d2">
-                <div class="card-num">03</div>
-                <div class="card-name">Beer-Battered Rings</div>
-                <div class="card-desc">Thick-cut onion rings in a golden beer batter. Crispy, crunchy, served with chipotle dipping sauce. Sharing is optional.</div>
-                <div class="card-foot">
-                    <div class="card-price">$5.99</div>
-                </div>
-            </div>
-
-            <div class="card rv rv-d3">
-                <div class="card-num">04</div>
-                <div class="card-name">Mac Bites</div>
-                <div class="card-desc">Panko-crusted, deep-fried mac & cheese bites. Creamy on the inside, crunchy outside. Served with comeback sauce on the side.</div>
-                <div class="card-foot">
-                    <div class="card-price">$6.99</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- DRINKS -->
-    <div class="tab-panel" id="tab-drinks">
-        <div class="menu-grid">
-            <div class="card rv">
-                <div class="card-badge">Classic</div>
-                <div class="card-num">01</div>
-                <div class="card-name">Krave Milkshake</div>
-                <div class="card-desc">Hand-spun, thick & creamy shakes in Vanilla Bean, Dark Chocolate, and Strawberry. The kind you have to eat with a spoon. The kind you finish alone.</div>
-                <div class="card-foot">
-                    <div class="card-price">$6.99</div>
-                </div>
-            </div>
-
-            <div class="card rv rv-d1">
-                <div class="card-badge">Popular</div>
-                <div class="card-num">02</div>
-                <div class="card-name">Dirty Lemonade</div>
-                <div class="card-desc">Fresh-squeezed lemonade with a rotating mystery twist — Mango Chili, Blueberry Lavender, or the Classic. Ask us what's going in today.</div>
-                <div class="card-foot">
-                    <div class="card-price">$4.99</div>
-                </div>
-            </div>
-
-            <div class="card rv rv-d2">
-                <div class="card-num">03</div>
-                <div class="card-name">Craft Soda</div>
-                <div class="card-desc">Rotating seasonal flavours from local small-batch makers. Big taste, not mass-produced. Ask us what's pouring today.</div>
-                <div class="card-foot">
-                    <div class="card-price">$3.99</div>
-                </div>
-            </div>
-
-            <div class="card rv rv-d3">
-                <div class="card-num">04</div>
-                <div class="card-name">Iced Tea & Lemonade</div>
-                <div class="card-desc">Fresh-brewed iced tea or an Arnold Palmer. Simple, refreshing, and the perfect sidekick to any smash burger on the menu.</div>
-                <div class="card-foot">
-                    <div class="card-price">$3.49</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- ABOUT -->
 <section class="about-sec" id="about">
@@ -1366,7 +1205,7 @@
 
         <div class="loc-section-hd rv">
             <div class="sec-label sec-label-b">Visit Us</div>
-            <h2 class="sec-title" style="color:var(--blue); font-size:clamp(3.5rem, 5.5vw, 5.5rem)">COME<br>FIND US</h2>
+            <h2 class="sec-title" style="font-size:clamp(3.5rem, 5.5vw, 5.5rem)"><span style="color:var(--white)">COME</span><br><span style="color:var(--blue)">FIND US</span></h2>
         </div>
 
         <div class="loc-grid rv rv-d1">
