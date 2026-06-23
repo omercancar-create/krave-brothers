@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRAVE BROTHERS — Smashed. Stacked. Legendary.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800;1,900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <style>
+        /* ===========================
+           VARIABLES & RESET
+        =========================== */
+        :root {
+            --yellow:    #F5C400;
+            --yellow-lt: #FFD740;
+            --yellow-dk: #D4A800;
+            --blue:      #0047AB;
+            --blue-dk:   #003080;
+            --blue-lt:   #1A5BC4;
+            --white:     #FFFFFF;
+            --cream:     #FFFBF0;
+            --ink:       #1A1A1A;
+            --gray:      #666666;
+            --gray-lt:   #999999;
+            --bdl:       rgba(0,71,171,0.15);   /* border on light bg */
+            --bdd:       rgba(255,255,255,0.12); /* border on dark bg */
+            --nav-h:     100px;
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        html { scroll-behavior:smooth; font-size:16px; }
+
+        body {
+            background: var(--cream);
+            color: var(--ink);
+            font-family: 'Barlow', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Subtle grain overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        img { max-width:100%; display:block; }
+        a   { text-decoration:none; color:inherit; }
+
+        /* ===========================
+           NAV — always blue
+        =========================== */
+        .nav {
+            position: fixed;
+            inset: 0 0 auto;
+            height: var(--nav-h);
+            padding: 0 5%;
+            z-index: 1000;
+            background: var(--blue);
+            transition: background .3s, box-shadow .3s;
+        }
+        .nav.scrolled {
+            background: var(--blue-dk);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+        }
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo { height: 90px; width: auto; mix-blend-mode: screen; }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        .nav-links a {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+            font-size: .95rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--white);
+            opacity: .75;
+            transition: opacity .2s;
+        }
+        .nav-links a:hover { opacity: 1; }
+
+        .nav-cta {
+            background: var(--yellow) !important;
+            color: var(--ink) !important;
+            padding: .55rem 1.35rem !important;
+            opacity: 1 !important;
+            font-weight: 800 !important;
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+            transition: background .2s, transform .2s !important;
+        }
+        .nav-cta:hover {
+            background: var(--yellow-lt) !important;
+            transform: translateY(-2px);
+        }
+
+        /* Hamburger */
+        .nav-ham {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+        .nav-ham span {
+            width: 26px;
+            height: 2px;
+            background: var(--white);
+            transition: transform .3s, opacity .3s;
+            display: block;
+        }
+
+        /* ===========================
+           MOBILE OVERLAY — blue
+        =========================== */
+        .mob-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--blue-dk);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            transform: translateX(100%);
+            transition: transform .4s cubic-bezier(.77,0,.18,1);
+        }
+        .mob-menu.open { transform: translateX(0); }
+
+        .mob-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 5%;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.8rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .mob-links { list-style: none; text-align: center; }
+        .mob-links li + li { margin-top: 1.5rem; }
+        .mob-links a {
+            font-family: 'Passion One', sans-serif;
+            font-weight: 700;
+            font-size: 4rem;
+            letter-spacing: .04em;
+            color: var(--white);
+            transition: color .2s;
+        }
+        .mob-links a:hover { color: var(--yellow); }
+
+        /* ===========================
+           HERO — yellow background
+        =========================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding: var(--nav-h) 5% 0;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: var(--yellow);
+        }
+
+        /* Pattern background on yellow hero */
+        .hero-lines {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hero-lines::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('./Brand Assets 1.0/background-pattern-2k.png') center / 420px repeat;
+            opacity: 1;
+            mix-blend-mode: multiply;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 3;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 2rem;
+            min-height: calc(100vh - var(--nav-h));
+            padding: 4rem 0;
+        }
+
+        .hero-content { display:flex; flex-direction:column; gap:1.5rem; }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: rgba(0,71,171,.1);
+            border: 1px solid rgba(0,71,171,.25);
+            color: var(--blue-dk);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+            font-size: .82rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            padding: .38rem 1rem;
+            width: fit-content;
+            clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+        }
+        .hero-tag::before { content:'▶'; font-size:.6rem; }
+
+        .hero-hl {
+            font-family: 'Passion One', sans-serif;
+            font-weight: 900;
+            font-size: clamp(5rem, 10vw, 9rem);
+            line-height: .9;
+            letter-spacing: .02em;
+            color: var(--blue);
+        }
+        /* "STACKED." — white on yellow pops beautifully */
+        .hero-hl .yellow { color: var(--white); display:block; text-shadow: 2px 2px 0 rgba(0,48,128,.15); }
+        /* "LEGENDARY." — blue outline stroke */
+        .hero-hl .stroke {
+            -webkit-text-stroke: 3px var(--blue);
+            color: transparent;
+            display: block;
+        }
+
+        .hero-sub {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.12rem;
+            font-weight: 500;
+            color: var(--blue);
+            max-width: 420px;
+            line-height: 1.65;
+        }
+
+        .hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; margin-top:.25rem; }
+
+        /* Buttons */
+        .btn-y, .btn-o {
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 800;
+            font-size: .95rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: .9rem 2rem;
+            clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+            cursor: pointer;
+            border: none;
+            transition: transform .2s, box-shadow .2s, background .2s, border-color .2s;
+        }
+        .btn-y {
+            background: var(--blue);
+            color: var(--white);
+        }
+        .btn-y:hover {
+            background: var(--blue-dk);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(0,71,171,.3);
+        }
+        .btn-o {
+            background: transparent;
+            color: var(--blue-dk);
+            border: 2px solid var(--blue);
+        }
+        .btn-o:hover {
+            border-color: var(--blue-dk);
+            background: rgba(0,71,171,.08);
+            transform: translateY(-2px);
+        }
+
+        /* Stats row */
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0,71,171,.2);
+            margin-top: .25rem;
+        }
+        .stat { display:flex; flex-direction:column; gap:.15rem; }
+        .stat-n {
+            font-family: 'Passion One', sans-serif;
+            font-weight: 900;
+            font-size: 2.2rem;
+            color: var(--blue-dk);
+            line-height: 1;
+        }
+        .stat-l {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: .95rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--blue);
+            opacity: .75;
+        }
+
+        /* Hero visual */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-glow {
+            position: absolute;
+            width: 72%; height: 72%;
+            background: radial-gradient(circle, rgba(0,71,171,.12) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-mascot {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 760px;
+            filter: drop-shadow(0 20px 55px rgba(0,48,128,.2));
+            mix-blend-mode: screen;
+            animation: float 3.2s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50%      { transform: translateY(-14px); }
+        }
+
+        /* Badge — blue on yellow = perfect brand match */
+        .hero-badge {
+            position: absolute;
+            top: 14%; right: -4%;
+            background: var(--blue);
+            color: var(--white);
+            font-family: 'Passion One', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: .05em;
+            line-height: 1.3;
+            padding: .85rem 1.2rem;
+            text-align: center;
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+            animation: badge-wobble 2.2s ease-in-out infinite;
+            z-index: 5;
+        }
+        .hero-badge small {
+            display: block;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: .66rem;
+            letter-spacing: .1em;
+            opacity: .8;
+            margin-top: .2rem;
+        }
+        @keyframes badge-wobble {
+            0%,100% { transform: rotate(-4deg) scale(1); }
+            50%      { transform: rotate(-4deg) scale(1.06); }
+        }
+
+        /* Scroll hint — blue on yellow */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem; left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .4rem;
+            opacity: .4;
+            z-index: 3;
+        }
+        .scroll-hint span {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: .65rem;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--blue-dk);
+        }
+        .scroll-line {
+            width: 1px; height: 40px;
+            background: var(--blue);
+            animation: scroll-anim 1.6s ease-in-out infinite;
+        }
+        @keyframes scroll-anim {
+            0%   { transform: scaleY(0); transform-origin: top; }
+            50%  { transform: scaleY(1); transform-origin: top; }
+            51%  { transform: scaleY(1); transform-origin: bottom; }
+            100% { transform: scaleY(0); transform-origin: bottom; }
+        }
+
+        /* ===========================
+           MARQUEE — blue with white text
+        =========================== */
+        .marquee { background: var(--blue); overflow: hidden; padding: .75rem 0; }
+        .marquee-track {
+            display: flex;
+            white-space: nowrap;
+            animation: marquee 22s linear infinite;
+        }
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 1.4rem;
+            padding: 0 1.8rem;
+            font-family: 'Passion One', sans-serif;
+            font-weight: 400;
+            font-size: 1.25rem;
+            letter-spacing: .07em;
+            color: var(--white);
+        }
+        .marquee-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--yellow);
+            flex-shrink: 0;
+        }
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+        /* ===========================
+           SHARED SECTION UTILS
+        =========================== */
+        /* Default: yellow label (for dark/blue sections) */
+        .sec-label {
+            display: inline-flex;
+            align-items: center;
+            gap: .7rem;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--yellow);
+        }
+        .sec-label::after {
+            content: '';
+            display: block;
+            width: 38px; height: 2px;
+            background: var(--yellow);
+        }
+        /* Blue label variant (for light/cream sections) */
+        .sec-label-b {
+            color: var(--blue);
+        }
+        .sec-label-b::after {
+            background: var(--blue);
+        }
+
+        .sec-title {
+            font-family: 'Passion One', sans-serif;
+            font-weight: 900;
+            font-size: clamp(3.5rem, 7vw, 6rem);
+            line-height: .95;
+            letter-spacing: .02em;
+        }
+
+        /* ===========================
+           MENU SECTION — cream bg
+        =========================== */
+        .menu-sec {
+            padding: 7rem 5%;
+            background: var(--cream);
+            position: relative;
+        }
+
+        .menu-hd {
+            max-width: 1400px;
+            margin: 0 auto 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .menu-tabs {
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+            display: flex;
+            border-bottom: 1px solid var(--bdl);
+        }
+        .tab-btn {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--gray);
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            transition: color .2s;
+        }
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 0; right: 0;
+            height: 3px;
+            background: var(--blue);
+            transform: scaleX(0);
+            transition: transform .3s;
+        }
+        .tab-btn.active        { color: var(--blue); }
+        .tab-btn.active::after { transform: scaleX(1); }
+        .tab-btn:hover         { color: var(--blue); }
+
+        .tab-panel { display: none; max-width: 1400px; margin: 0 auto; }
+        .tab-panel.active { display: block; }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid var(--bdl);
+            padding: 1.75rem;
+            position: relative;
+            cursor: pointer;
+            clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+            transition: border-color .25s, transform .25s, box-shadow .25s;
+        }
+        .card:hover {
+            border-color: var(--blue);
+            transform: translateY(-5px);
+            box-shadow: 0 14px 44px rgba(0,71,171,.12);
+        }
+        .card-badge {
+            position: absolute;
+            top: -1px; right: 1.5rem;
+            background: var(--yellow);
+            color: var(--ink);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 800;
+            font-size: .68rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: .24rem .6rem;
+        }
+        .card-num {
+            position: absolute;
+            top: .4rem; right: 1rem;
+            font-family: 'Passion One', sans-serif;
+            font-weight: 900;
+            font-size: 4rem;
+            color: rgba(0,71,171,.06);
+            line-height: 1;
+            user-select: none;
+        }
+        .card-name {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 800;
+            font-size: 1.35rem;
+            letter-spacing: .02em;
+            text-transform: uppercase;
+            margin-bottom: .55rem;
+            line-height: 1.2;
+            color: var(--blue-dk);
+        }
+        .card-desc {
+            font-size: .875rem;
+            color: var(--gray);
+            line-height: 1.65;
+            margin-bottom: 1.3rem;
+        }
+        .card-foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .card-price {
+            font-family: 'Passion One', sans-serif;
+            font-weight: 700;
+            font-size: 1.75rem;
+            color: var(--blue);
+            letter-spacing: .02em;
+        }
+        .card-add {
+            width: 36px; height: 36px;
+            background: transparent;
+            border: 1px solid var(--bdl);
+            color: var(--blue);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s, border-color .2s, color .2s;
+        }
+        .card:hover .card-add {
+            background: var(--blue);
+            color: var(--white);
+            border-color: var(--blue);
+        }
+
+        /* ===========================
+           ABOUT SECTION — blue bg
+        =========================== */
+        .about-sec {
+            padding: 7rem 5%;
+            background: var(--blue);
+            position: relative;
+            overflow: hidden;
+        }
+        .about-sec::before {
+            content: 'KRAVE';
+            position: absolute;
+            bottom: -3.5rem; left: -2rem;
+            font-family: 'Passion One', sans-serif;
+            font-weight: 900;
+            font-size: 20rem;
+            color: rgba(255,255,255,.018);
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
+        }
+        .about-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        .about-content { display:flex; flex-direction:column; gap:1.5rem; }
+
+        .about-title {
+            font-family: 'Passion One', sans-serif;
+            font-weight: 900;
+            font-size: clamp(3.5rem, 5.5vw, 5.5rem);
+            line-height: 1;
+            letter-spacing: .02em;
+            color: var(--white);
+        }
+        .about-title .yb { color: var(--yellow); display: block; }
+
+        .about-body {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,.72);
+        }
+        .about-body strong { color: var(--white); }
+
+        .values {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .9rem;
+            margin-top: .25rem;
+        }
+        .val {
+            padding: 1rem 1.1rem;
+            border: 1px solid var(--bdd);
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+            display: flex;
+            flex-direction: column;
+            gap: .35rem;
+        }
+        .val-icon { font-size: 1.4rem; }
+        .val-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 800;
+            font-size: .9rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+        .val-desc { font-size: .78rem; color: rgba(255,255,255,.52); line-height: 1.5; }
+
+        .about-visual {
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        .about-glow {
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 290px; height: 290px;
+            background: radial-gradient(circle, rgba(0,0,0,.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .about-mascot {
+            position: relative;
+            z-index: 2;
+            max-width: 500px;
+            filter: drop-shadow(0 30px 55px rgba(0,0,0,.25));
+            mix-blend-mode: screen;
+        }
+        .chef-quote {
+            position: absolute;
+            top: 8%; right: -4%;
+            background: var(--yellow);
+            color: var(--ink);
+            padding: 1.1rem 1.4rem;
+            max-width: 178px;
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+            z-index: 5;
+        }
+        .chef-quote p {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 800;
+            font-size: .85rem;
+            letter-spacing: .04em;
+            line-height: 1.45;
+        }
+
+        /* ===========================
+           LOCATION SECTION — yellow bg
+        =========================== */
+        .loc-sec {
+            padding: 7rem 5%;
+            background: var(--yellow);
+            position: relative;
+        }
+        .loc-sec::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('./Brand Assets 1.0/background-pattern-2k.png') center / 420px repeat;
+            opacity: 1;
+            mix-blend-mode: multiply;
+            pointer-events: none;
+        }
+        .loc-inner { max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
+
+        .loc-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Opening soon badge — blue on yellow */
+        .cs-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: var(--blue);
+            color: var(--white);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            padding: .5rem 1.2rem;
+            clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+        }
+
+        .loc-sub {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.08rem;
+            color: var(--blue);
+            max-width: 480px;
+            line-height: 1.65;
+        }
+
+        .notify-form {
+            display: flex;
+            max-width: 420px;
+            width: 100%;
+        }
+        .notify-input {
+            flex: 1;
+            background: var(--white);
+            border: 2px solid rgba(0,71,171,.3);
+            border-right: none;
+            color: var(--ink);
+            font-family: 'Barlow', sans-serif;
+            font-size: .9rem;
+            padding: .8rem 1rem;
+            outline: none;
+            transition: border-color .2s;
+        }
+        .notify-input:focus   { border-color: var(--blue); }
+        .notify-input::placeholder { color: var(--gray-lt); }
+        .notify-btn {
+            background: var(--blue);
+            color: var(--white);
+            border: none;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 800;
+            font-size: .88rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            padding: .8rem 1.5rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background .2s;
+        }
+        .notify-btn:hover { background: var(--blue-dk); }
+
+        .loc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        /* Google Maps embed */
+        .map-wrap {
+            border: 3px solid var(--blue);
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+            box-shadow: 6px 6px 0 var(--blue-dk);
+        }
+        .map-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            filter: hue-rotate(200deg) saturate(1.2);
+        }
+
+        /* Location details on yellow */
+        .loc-details { display: flex; flex-direction: column; gap: 1.6rem; }
+
+        .dl { display: flex; flex-direction: column; gap: .35rem; }
+        .dl-lbl {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--blue-dk);
+        }
+        .dl-val {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--blue);
+            line-height: 1.5;
+        }
+
+        .hrs-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--blue-dk);
+            margin-bottom: .7rem;
+        }
+        .hrs-row {
+            display: flex;
+            justify-content: space-between;
+            padding: .5rem 0;
+            border-bottom: 1px solid rgba(0,71,171,.2);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .hrs-row:last-child { border-bottom: none; }
+        .hrs-day { color: var(--blue); opacity: .75; }
+        .hrs-time { color: var(--blue-dk); font-weight: 700; }
+        /* Override inline yellow for social handles — blue on yellow is readable */
+        .loc-sec .hrs-time[style] { color: var(--blue-dk) !important; }
+
+        /* ===========================
+           FOOTER — dark blue
+        =========================== */
+        .footer {
+            background: var(--blue-dk);
+            border-top: 1px solid rgba(245,196,0,.25);
+            padding: 4rem 5% 2.5rem;
+        }
+        .footer-inner { max-width: 1400px; margin: 0 auto; }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid var(--bdd);
+        }
+
+        .f-brand { display:flex; flex-direction:column; gap:1rem; }
+        .f-logo  { width: 240px; height: auto; mix-blend-mode: screen; }
+
+        .f-tagline {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-style: italic;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: rgba(255,255,255,.58);
+            max-width: 260px;
+            line-height: 1.55;
+        }
+
+        .socials { display:flex; gap:.7rem; margin-top:.4rem; }
+        .soc-link {
+            width: 40px; height: 40px;
+            border: 1px solid rgba(255,255,255,.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+            transition: border-color .2s, background .2s;
+        }
+        .soc-link:hover {
+            border-color: var(--yellow);
+            background: rgba(245,196,0,.1);
+        }
+        .soc-link svg {
+            width: 17px; height: 17px;
+            fill: rgba(255,255,255,.5);
+            transition: fill .2s;
+        }
+        .soc-link:hover svg { fill: var(--yellow); }
+
+        .f-col-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 800;
+            font-size: .82rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 1.2rem;
+        }
+        .f-links { list-style:none; display:flex; flex-direction:column; gap:.75rem; }
+        .f-links a {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgba(255,255,255,.55);
+            letter-spacing: .04em;
+            transition: color .2s;
+        }
+        .f-links a:hover { color: var(--yellow); }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .f-copy {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: .85rem;
+            color: rgba(255,255,255,.35);
+            letter-spacing: .04em;
+        }
+        .f-copy .hl { color: var(--yellow); }
+
+        /* ===========================
+           REVEAL ANIMATIONS
+        =========================== */
+        .rv {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity .65s ease, transform .65s ease;
+        }
+        .rv.in { opacity: 1; transform: translateY(0); }
+        .rv-d1 { transition-delay: .1s; }
+        .rv-d2 { transition-delay: .2s; }
+        .rv-d3 { transition-delay: .3s; }
+        .rv-d4 { transition-delay: .4s; }
+
+        /* ===========================
+           RESPONSIVE — TABLET
+        =========================== */
+        @media (max-width: 1024px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            .hero-content { align-items: center; }
+            .hero-sub     { text-align: center; margin: 0 auto; }
+            .hero-stats   { justify-content: center; }
+            .hero-visual  { max-width: 360px; margin: 0 auto; }
+
+            .about-inner  { grid-template-columns: 1fr; gap: 3rem; }
+            .about-visual { order: -1; }
+            .about-mascot { max-width: 380px; margin: 0 auto; }
+            .chef-quote   { right: 0; }
+
+            .loc-grid { grid-template-columns: 1fr; }
+
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+            .f-brand    { grid-column: 1 / -1; }
+        }
+
+        /* ===========================
+           RESPONSIVE — MOBILE
+        =========================== */
+        @media (max-width: 768px) {
+            :root { --nav-h: 72px; }
+
+            /* Nav */
+            .nav-links { display: none; }
+            .nav-ham   { display: flex; }
+            .mob-menu  { display: flex; }
+            .nav-logo  { height: 58px; }
+
+            /* Hero */
+            .hero-inner  { padding: 2rem 0 3rem; min-height: calc(100svh - var(--nav-h)); }
+            .hero-hl     { font-size: clamp(3.5rem, 14vw, 6rem); }
+            .hero-visual { max-width: 260px; }
+            .hero-badge  { display: none; }
+            .hero-stats  { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
+            .stat-n      { font-size: 1.8rem; }
+            .stat-l      { font-size: .82rem; }
+            .hero-ctas   { flex-direction: column; align-items: center; width: 100%; }
+            .btn-y, .btn-o { width: 100%; max-width: 320px; justify-content: center; }
+
+            /* Sections */
+            .menu-sec, .about-sec, .loc-sec { padding: 4rem 5%; }
+            .footer { padding: 3rem 5% 2rem; }
+
+            /* Menu tabs — horizontal scroll */
+            .menu-tabs  { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 0; }
+            .tab-btn    { font-size: .9rem; padding: .8rem 1.1rem; white-space: nowrap; }
+            .menu-grid  { grid-template-columns: 1fr; }
+
+            /* About */
+            .about-mascot { max-width: 260px; }
+            .chef-quote   { display: none; }
+            .about-title  { font-size: clamp(2.5rem, 10vw, 4rem); }
+            .values       { grid-template-columns: 1fr; }
+
+            /* Titles */
+            .sec-title    { font-size: clamp(2.5rem, 11vw, 4rem); }
+
+            /* Location */
+            .notify-form  { flex-direction: column; }
+            .notify-input { border-right: 2px solid rgba(0,71,171,.3); border-bottom: none; }
+
+            /* Footer */
+            .footer-top    { grid-template-columns: 1fr; gap: 1.5rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .f-logo        { width: 180px; }
+        }
+
+        /* ===========================
+           RESPONSIVE — SMALL MOBILE
+        =========================== */
+        @media (max-width: 480px) {
+            .hero-hl     { font-size: clamp(3rem, 13vw, 4.5rem); }
+            .hero-visual { max-width: 220px; }
+            .hero-tag    { font-size: .72rem; }
+            .hero-sub    { font-size: 1rem; }
+            .stat-n      { font-size: 1.5rem; }
+
+            .about-mascot { max-width: 220px; }
+            .sec-title    { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+
+            .card    { padding: 1.25rem; }
+            .map-wrap { aspect-ratio: 1 / 1; }
+
+            .hrs-row { font-size: .9rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+    <button class="mob-close" id="mobClose">✕</button>
+    <ul class="mob-links">
+        <li><a href="#menu" onclick="closeMob()">Menu</a></li>
+        <li><a href="#about" onclick="closeMob()">About</a></li>
+        <li><a href="#location" onclick="closeMob()">Location</a></li>
+    </ul>
+    <a href="#location" class="btn-y" onclick="closeMob()">Order Now →</a>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="#" aria-label="KRAVE BROTHERS Home">
+            <img src="./Brand Assets 2.0/logo-cows-on-text-2k-Photoroom.png" alt="Krave Brothers" class="nav-logo">
+        </a>
+        <ul class="nav-links">
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#location">Location</a></li>
+            <li><a href="#location" class="nav-cta">Order Now →</a></li>
+        </ul>
+        <button class="nav-ham" id="ham" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-lines"></div>
+
+    <div class="hero-inner">
+        <div class="hero-content">
+            <div class="hero-tag">KRAVE BROTHERS — Est. 2026</div>
+
+            <h1 class="hero-hl">
+                <span>SMASHED.</span>
+                <span class="yellow">STACKED.</span>
+                <span class="stroke">LEGENDARY.</span>
+            </h1>
+
+            <p class="hero-sub">
+                We don't flip burgers — we smash them. Crispy caramelized edges, juicy centres, flavours that hit different. This is the only burger spot that matters.
+            </p>
+
+            <div class="hero-ctas">
+                <a href="#menu" class="btn-y">See Our Menu ↓</a>
+                <a href="#location" class="btn-o">Find Us →</a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-n">100%</span>
+                    <span class="stat-l">Fresh Never Frozen</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-n">2</span>
+                    <span class="stat-l">Brothers. One Mission.</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-n">∞</span>
+                    <span class="stat-l">Flavour Obsession</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="hero-glow"></div>
+            <img src="./Brand Assets 2.0/mascot-cap-cow-2k-Photoroom.png" alt="Krave Brothers Mascot" class="hero-mascot">
+            <div class="hero-badge">
+                FRESH<br>NEVER<br>FROZEN
+                <small>Always Quality</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-hint">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+        <span class="marquee-item">SMASH BURGERS <span class="marquee-dot"></span></span>
+        <span class="marquee-item">CRISPY EDGES <span class="marquee-dot"></span></span>
+        <span class="marquee-item">FRESH BEEF DAILY <span class="marquee-dot"></span></span>
+        <span class="marquee-item">STREET VIBES <span class="marquee-dot"></span></span>
+        <span class="marquee-item">KRAVE BROTHERS <span class="marquee-dot"></span></span>
+        <span class="marquee-item">NEVER FROZEN <span class="marquee-dot"></span></span>
+        <span class="marquee-item">DOUBLE DOWN <span class="marquee-dot"></span></span>
+        <span class="marquee-item">ORDER NOW <span class="marquee-dot"></span></span>
+        <!-- Duplicate for seamless loop -->
+        <span class="marquee-item">SMASH BURGERS <span class="marquee-dot"></span></span>
+        <span class="marquee-item">CRISPY EDGES <span class="marquee-dot"></span></span>
+        <span class="marquee-item">FRESH BEEF DAILY <span class="marquee-dot"></span></span>
+        <span class="marquee-item">STREET VIBES <span class="marquee-dot"></span></span>
+        <span class="marquee-item">KRAVE BROTHERS <span class="marquee-dot"></span></span>
+        <span class="marquee-item">NEVER FROZEN <span class="marquee-dot"></span></span>
+        <span class="marquee-item">DOUBLE DOWN <span class="marquee-dot"></span></span>
+        <span class="marquee-item">ORDER NOW <span class="marquee-dot"></span></span>
+    </div>
+</div>
+
+<!-- MENU -->
+<section class="menu-sec" id="menu">
+    <div class="menu-hd rv">
+        <div class="sec-label sec-label-b">What We're Serving</div>
+        <h2 class="sec-title" style="color:var(--blue)">THE<br><span style="color:var(--blue)">MENU</span></h2>
+    </div>
+
+    <div class="menu-tabs">
+        <button class="tab-btn active" data-tab="burgers">🍔 Burgers</button>
+        <button class="tab-btn" data-tab="sides">🍟 Sides</button>
+        <button class="tab-btn" data-tab="drinks">🥤 Drinks</button>
+    </div>
+
+    <!-- BURGERS -->
+    <div class="tab-panel active" id="tab-burgers">
+        <div class="menu-grid">
+            <div class="card rv">
+                <div class="card-badge">Fan Fav</div>
+                <div class="card-num">01</div>
+                <div class="card-name">The OG Smash</div>
+                <div class="card-desc">The classic that started it all. Crispy caramelized edges, American cheese, dill pickles, and our secret smash sauce on a toasted bun. No notes.</div>
+                <div class="card-foot">
+                    <div class="card-price">$9.99</div>
+                    <button class="card-add" aria-label="Add to order">+</button>
+                </div>
+            </div>
+
+            <div class="card rv rv-d1">
+                <div class="card-num">02</div>
+                <div class="card-name">Double Trouble</div>
+                <div class="card-desc">Two perfectly smashed patties, double American cheese, diced white onions, mustard, and comeback sauce. You already know you're ordering two.</div>
+                <div class="card-foot">
+                    <div class="card-price">$13.99</div>
+                    <button class="card-add" aria-label="Add to order">+</button>
+                </div>
+            </div>
+
+            <div class="card rv rv-d2">
+                <div class="card-badge">Signature</div>
+                <div class="card-num">03</div>
+                <div class="card-name">Krave Special</div>
+                <div class="card-desc">Two smash patties, gruyère, caramelized onions, arugula, truffle aioli, and a brioche bun we baked this morning. This one is art.</div>
+                <div class="card-foot">
+                    <div class="card-price">$15.99</div>
+                    <button class="card-add" aria-label="Add to order">+</button>
+                </div>
+            </div>
+
+            <div class="card rv rv-d3">
+                <div class="card-num">04</div>
+                <div class="card-name">The Smoky Brother</div>
+                <div class="card-desc">Smoked gouda, crispy thick-cut bacon, chipotle mayo, jalapeño rings, and a smash patty that slaps. Smoky, rich, absolutely filthy.</div>
+                <div class="card-foot">
+                    <div class="card-price">$14.99</div>
+                    <button class="card-add" aria-label="Add to order">+</button>
+                </div>
+            </div>
+
+            <div class="card rv rv-d1">
+                <div class="card-badge">🔥 Spicy</div>
+                <div class="card-num">05</div>
+                <div class="card-name">The Angry Bird</div>
+                <div class="card-desc">Pepper jack, fresh jalapeños, pickled habanero, sriracha honey drizzle, and cooling slaw. Not for the timid. Don't say we didn't warn you.</div>
+                <div class="card-foot">
+                    <div class="card-price">$13.99</div>
+                    <button class="card-add" aria-label="Add to order">+</button>
+                </div>
+            </div>
+
+            <div class="card rv rv-d2">
+                <div class="card-num">06</div>
+                <div class="card-name">The Mushy</div>
+                <div class="card-desc">Sautéed wild mushrooms, Swiss cheese, garlic aioli, caramelized onions, fresh thyme. For the ones who know what they're doing.</div>
+                <div class="card-foot">
+                    <div class="card-price">$14.49</div>
+                    <button class="card-add" aria-label="Add to order">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIDES -->
+    <div class="tab-panel" id="tab-sides">
+        <div class="menu-grid">
+            <div class="card rv">
+                <div class="card-badge">Must Try</div>
+                <div class="card-num">01</div>
+                <div class="card-name">Smash Fries</div>
+                <div class="card-desc">Hand-cut, double-fried until shatteringly crisp, tossed in our secret seasoning blend. The best fries you've ever had — we're calling it.</div>
+                <div class="card-foot">
+                    <div class="card-price">$4.99</div>
+                    <button class="card-add" aria-label="Add to order">+</button>
+                </div>
+            </div>
+
+            <div class="card rv rv-d1">
+                <div class="card-num">02</div>
+                <div class="card-name">Cheese Fries</div>
+                <div class="card-desc">Our smash fries absolutely drowning in homemade cheddar cheese sauce with a kick of hot sauce. Catch the drip.</div>
+                <div class="card-foot">
+                    <div class="card-price">$6.99</div>
+                    <button class="card-add" aria-label="Add to order">+</button>
+                </div>
+            </div>
+
+            <div class="card rv rv-d2">
+                <div class="card-num">03</div>
+                <div class="card-name">Beer-Battered Rings</div>
+                <div class="card-desc">Thick-cut onion rings in a golden beer batter. Crispy, crunchy, served with chipotle dipping sauce. Sharing is optional.</div>
+                <div class="card-foot">
+                    <div class="card-price">$5.99</div>
+                    <button class="card-add" aria-label="Add to order">+</button>
+                </div>
+            </div>
+
+            <div class="card rv rv-d3">
+                <div class="card-num">04</div>
+                <div class="card-name">Mac Bites</div>
+                <div class="card-desc">Panko-crusted, deep-fried mac & cheese bites. Creamy on the inside, crunchy outside. Served with comeback sauce on the side.</div>
+                <div class="card-foot">
+                    <div class="card-price">$6.99</div>
+                    <button class="card-add" aria-label="Add to order">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DRINKS -->
+    <div class="tab-panel" id="tab-drinks">
+        <div class="menu-grid">
+            <div class="card rv">
+                <div class="card-badge">Classic</div>
+                <div class="card-num">01</div>
+                <div class="card-name">Krave Milkshake</div>
+                <div class="card-desc">Hand-spun, thick & creamy shakes in Vanilla Bean, Dark Chocolate, and Strawberry. The kind you have to eat with a spoon. The kind you finish alone.</div>
+                <div class="card-foot">
+                    <div class="card-price">$6.99</div>
+                    <button class="card-add" aria-label="Add to order">+</button>
+                </div>
+            </div>
+
+            <div class="card rv rv-d1">
+                <div class="card-badge">Popular</div>
+                <div class="card-num">02</div>
+                <div class="card-name">Dirty Lemonade</div>
+                <div class="card-desc">Fresh-squeezed lemonade with a rotating mystery twist — Mango Chili, Blueberry Lavender, or the Classic. Ask us what's going in today.</div>
+                <div class="card-foot">
+                    <div class="card-price">$4.99</div>
+                    <button class="card-add" aria-label="Add to order">+</button>
+                </div>
+            </div>
+
+            <div class="card rv rv-d2">
+                <div class="card-num">03</div>
+                <div class="card-name">Craft Soda</div>
+                <div class="card-desc">Rotating seasonal flavours from local small-batch makers. Big taste, not mass-produced. Ask us what's pouring today.</div>
+                <div class="card-foot">
+                    <div class="card-price">$3.99</div>
+                    <button class="card-add" aria-label="Add to order">+</button>
+                </div>
+            </div>
+
+            <div class="card rv rv-d3">
+                <div class="card-num">04</div>
+                <div class="card-name">Iced Tea & Lemonade</div>
+                <div class="card-desc">Fresh-brewed iced tea or an Arnold Palmer. Simple, refreshing, and the perfect sidekick to any smash burger on the menu.</div>
+                <div class="card-foot">
+                    <div class="card-price">$3.49</div>
+                    <button class="card-add" aria-label="Add to order">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-sec" id="about">
+    <div class="about-inner">
+        <div class="about-content rv">
+            <div class="sec-label">Our Story</div>
+
+            <h2 class="about-title">
+                TWO<br>
+                <span class="yb">BROTHERS.</span><br>
+                ONE<br>
+                OBSESSION.
+            </h2>
+
+            <p class="about-body">
+                It started with a cast iron pan, a block of fresh beef, and a bet. Two brothers — one with a chef's hat, one with a cap — decided that <strong>the perfect smash burger didn't exist yet.</strong> So they made it.
+            </p>
+            <p class="about-body">
+                We source fresh, never-frozen beef every single day. We bake our own brioche buns. We make every sauce from scratch. We don't cut corners — <strong>we smash them.</strong>
+            </p>
+
+            <div class="values">
+                <div class="val">
+                    <div class="val-icon">🥩</div>
+                    <div class="val-title">Fresh Daily</div>
+                    <div class="val-desc">Beef ground and delivered every morning. No freezers. No compromises. Ever.</div>
+                </div>
+                <div class="val">
+                    <div class="val-icon">🧀</div>
+                    <div class="val-title">Real Cheese</div>
+                    <div class="val-desc">American singles, gruyère, smoked gouda — the real stuff, always, no exceptions.</div>
+                </div>
+                <div class="val">
+                    <div class="val-icon">🍞</div>
+                    <div class="val-title">House Buns</div>
+                    <div class="val-desc">Brioche baked in-house daily. The bun is not an afterthought. Not here.</div>
+                </div>
+                <div class="val">
+                    <div class="val-icon">🔥</div>
+                    <div class="val-title">Smash Technique</div>
+                    <div class="val-desc">Maximum crust, maximum flavour. Every single patty, every single time.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-visual rv rv-d2">
+            <div class="about-glow"></div>
+            <img src="./Brand Assets 2.0/mascot-duo-no-text-2k-Photoroom.png" alt="Krave Brothers Mascots" class="about-mascot">
+            <div class="chef-quote">
+                <p>"THE SECRET IS IN THE SMASH — AND WE'RE NOT TELLING."</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LOCATION -->
+<section class="loc-sec" id="location">
+    <div class="loc-inner">
+        <div class="loc-header rv">
+            <div class="cs-badge">📍 Opening Soon</div>
+            <h2 class="sec-title" style="text-align:center; color:var(--blue)">
+                WE'RE COMING<br>TO YOUR HOOD
+            </h2>
+            <p class="loc-sub">
+                Drop your email and be the first to know when we open, score exclusive launch deals, and get your spot in line before anyone else.
+            </p>
+            <div class="notify-form">
+                <input type="email" class="notify-input" id="notifyInput" placeholder="your@email.com" aria-label="Email address">
+                <button class="notify-btn" id="notifyBtn">Notify Me</button>
+            </div>
+        </div>
+
+        <div class="loc-grid rv rv-d1">
+            <div class="map-wrap">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101980.66710997!2d144.7851166!3d-37.8136276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sau!4v1700000000000!5m2!1sen!2sau"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Krave Brothers Location">
+                </iframe>
+            </div>
+
+            <div class="loc-details">
+                <div class="dl">
+                    <div class="dl-lbl">Address</div>
+                    <div class="dl-val">Coming soon to a<br>neighbourhood near you</div>
+                </div>
+
+                <div>
+                    <div class="hrs-title">Hours (Once Open)</div>
+                    <div>
+                        <div class="hrs-row">
+                            <span class="hrs-day">Monday – Thursday</span>
+                            <span class="hrs-time">11:00 AM – 10:00 PM</span>
+                        </div>
+                        <div class="hrs-row">
+                            <span class="hrs-day">Friday</span>
+                            <span class="hrs-time">11:00 AM – 11:00 PM</span>
+                        </div>
+                        <div class="hrs-row">
+                            <span class="hrs-day">Saturday</span>
+                            <span class="hrs-time">10:00 AM – 11:00 PM</span>
+                        </div>
+                        <div class="hrs-row">
+                            <span class="hrs-day">Sunday</span>
+                            <span class="hrs-time">10:00 AM – 9:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="hrs-title">Find Us Online</div>
+                    <div>
+                        <div class="hrs-row">
+                            <span class="hrs-day">Instagram</span>
+                            <span class="hrs-time" style="color:var(--yellow)">@kravebrothers</span>
+                        </div>
+                        <div class="hrs-row">
+                            <span class="hrs-day">TikTok</span>
+                            <span class="hrs-time" style="color:var(--yellow)">@kravebrothers</span>
+                        </div>
+                        <div class="hrs-row">
+                            <span class="hrs-day">Email</span>
+                            <span class="hrs-time" style="color:var(--yellow)">hello@kravebrothers.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="f-brand">
+                <img src="./Brand Assets 2.0/logo-horizontal-2k-Photoroom.png" alt="Krave Brothers" class="f-logo">
+                <p class="f-tagline">"Perfectly smashed. Never frozen. Always legendary."</p>
+                <div class="socials">
+                    <!-- Instagram -->
+                    <a href="#" class="soc-link" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <!-- TikTok -->
+                    <a href="#" class="soc-link" aria-label="TikTok">
+                        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                    </a>
+                    <!-- X/Twitter -->
+                    <a href="#" class="soc-link" aria-label="X (Twitter)">
+                        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <div class="f-col-title">Quick Links</div>
+                <ul class="f-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#about">Our Story</a></li>
+                    <li><a href="#location">Location</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="f-col-title">Get In Touch</div>
+                <ul class="f-links">
+                    <li><a href="mailto:hello@kravebrothers.com">hello@kravebrothers.com</a></li>
+                    <li><a href="#">Press & Media</a></li>
+                    <li><a href="#">Catering</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="f-copy">© 2026 <span class="hl">KRAVE BROTHERS</span>. All rights reserved. Made with 🔥 and a flat iron.</p>
+            <p class="f-copy">Fresh. Never Frozen. Always <span class="hl">Legendary</span>.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Navbar scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // Mobile menu
+    const ham     = document.getElementById('ham');
+    const mobMenu = document.getElementById('mobMenu');
+    const mobClose= document.getElementById('mobClose');
+
+    ham.addEventListener('click', () => {
+        mobMenu.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    });
+    mobClose.addEventListener('click', closeMob);
+
+    function closeMob() {
+        mobMenu.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // Tab system
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = btn.dataset.tab;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + target).classList.add('active');
+
+            // Re-trigger reveal for newly visible cards
+            document.querySelectorAll('#tab-' + target + ' .rv').forEach(el => {
+                el.classList.remove('in');
+                requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('in')));
+            });
+        });
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+
+    // Email signup
+    const notifyBtn   = document.getElementById('notifyBtn');
+    const notifyInput = document.getElementById('notifyInput');
+
+    notifyBtn.addEventListener('click', () => {
+        const email = notifyInput.value.trim();
+        if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            notifyBtn.textContent = "✓ You're on the list!";
+            notifyBtn.style.background = '#22c55e';
+            notifyInput.value = '';
+            notifyInput.placeholder = "We'll be in touch!";
+            setTimeout(() => {
+                notifyBtn.textContent = 'Notify Me';
+                notifyBtn.style.background = '';
+                notifyInput.placeholder = 'your@email.com';
+            }, 3500);
+        } else {
+            notifyInput.style.borderColor = '#ef4444';
+            notifyInput.focus();
+            setTimeout(() => { notifyInput.style.borderColor = ''; }, 1600);
+        }
+    });
+
+    notifyInput.addEventListener('keydown', e => {
+        if (e.key === 'Enter') notifyBtn.click();
+    });
+</script>
+</body>
+</html>
