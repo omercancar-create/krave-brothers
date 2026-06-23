@@ -1565,8 +1565,12 @@
     const mobClose= document.getElementById('mobClose');
 
     ham.addEventListener('click', () => {
-        mobMenu.classList.add('open');
-        document.body.style.overflow = 'hidden';
+        if (mobMenu.classList.contains('open')) {
+            closeMob();
+        } else {
+            mobMenu.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
     });
     mobClose.addEventListener('click', closeMob);
 
