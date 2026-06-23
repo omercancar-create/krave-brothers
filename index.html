@@ -1002,16 +1002,16 @@
             .tab-btn    { font-size: .9rem; padding: .8rem 1.1rem; white-space: nowrap; }
             .menu-grid  { grid-template-columns: 1fr; }
 
-            /* About — mascot floats top-right, text flows full width */
-            .about-inner   { grid-template-columns: 1fr; align-items: stretch; position: relative; gap: 1.5rem; max-width: 100%; }
-            .about-content { width: 100%; box-sizing: border-box; }
-            .about-body    { width: 100%; max-width: 100%; }
-            .about-visual  { position: absolute; top: 0; right: 0; width: 120px; order: 0; }
-            .about-mascot  { max-width: 120px; width: 100%; }
-            .about-title   { font-size: clamp(2.5rem, 10vw, 4rem); padding-right: 130px; }
+            /* About — float mascot right so text fills full width naturally */
+            .about-inner   { display: block; }
+            .about-visual  { float: right; width: 120px; margin-left: 1rem; margin-bottom: .5rem; }
+            .about-mascot  { width: 120px; max-width: 120px; }
+            .about-content { display: block; width: 100%; }
             .about-glow    { display: none; }
             .chef-quote    { display: none; }
-            .values        { grid-template-columns: 1fr; width: 100%; }
+            .about-title   { font-size: clamp(2.5rem, 10vw, 4rem); }
+            .values        { display: grid; grid-template-columns: 1fr; gap: .9rem; }
+            .about-sec::after { display: none; }
 
             /* Titles */
             .sec-title    { font-size: clamp(2.5rem, 11vw, 4rem); }
