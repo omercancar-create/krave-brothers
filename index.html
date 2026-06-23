@@ -1002,13 +1002,13 @@
             .tab-btn    { font-size: .9rem; padding: .8rem 1.1rem; white-space: nowrap; }
             .menu-grid  { grid-template-columns: 1fr; }
 
-            /* About — mascot beside TWO BROTHERS on mobile */
-            .about-inner   { grid-template-columns: 1fr 130px; gap: 1.5rem; align-items: start; }
-            .about-visual  { order: 0; align-self: start; }
+            /* About — mascot floats top-right, text flows full width */
+            .about-inner   { grid-template-columns: 1fr; position: relative; gap: 1.5rem; }
+            .about-visual  { position: absolute; top: 0; right: 0; width: 130px; order: 0; }
             .about-mascot  { max-width: 130px; }
+            .about-title   { font-size: clamp(2.5rem, 10vw, 4rem); padding-right: 140px; }
             .about-glow    { display: none; }
             .chef-quote    { display: none; }
-            .about-title   { font-size: clamp(2.5rem, 10vw, 4rem); }
             .values        { grid-template-columns: 1fr; }
 
             /* Titles */
