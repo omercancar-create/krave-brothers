@@ -133,10 +133,18 @@
         .menu-header-title {
             font-family: 'Passion One', sans-serif;
             font-weight: 900;
-            font-size: clamp(4rem, 10vw, 8rem);
-            line-height: .9;
-            color: var(--blue);
+            font-size: clamp(5rem, 12vw, 10rem);
+            line-height: .88;
             letter-spacing: .02em;
+        }
+        .menu-header-sub {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--blue);
+            max-width: 420px;
+            line-height: 1.6;
+            margin-top: .5rem;
         }
 
         /* ===========================
@@ -321,8 +329,12 @@
 <!-- PAGE HEADER -->
 <header class="menu-header">
     <div class="menu-header-inner">
-        <div class="menu-header-label">Krave Brothers</div>
-        <h1 class="menu-header-title">THE<br>MENU</h1>
+        <div class="menu-header-label">KRAVE BROTHERS — Est. 2026</div>
+        <h1 class="menu-header-title">
+            <span style="color:var(--white)">THE</span><br>
+            <span style="color:var(--blue)">MENU.</span>
+        </h1>
+        <p class="menu-header-sub">Six smash burgers. Four sides. Four drinks. All built different.</p>
     </div>
 </header>
 
