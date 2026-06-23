@@ -1001,8 +1001,11 @@
             .tab-btn    { font-size: .9rem; padding: .8rem 1.1rem; white-space: nowrap; }
             .menu-grid  { grid-template-columns: 1fr; }
 
-            /* About — smaller mascot */
-            .about-mascot { max-width: 200px; }
+            /* About — side by side on mobile: text left, mascot right */
+            .about-inner  { grid-template-columns: 3fr 2fr; gap: 1rem; align-items: start; }
+            .about-visual { order: 0; }
+            .about-mascot { max-width: 150px; margin: 0; }
+            .about-glow   { display: none; }
             .chef-quote   { display: none; }
             .about-title  { font-size: clamp(2.5rem, 10vw, 4rem); }
             .values       { grid-template-columns: 1fr; }
