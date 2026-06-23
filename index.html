@@ -587,24 +587,13 @@
             position: relative;
             overflow: hidden;
         }
-        .about-sec::before {
-            content: 'KRAVE';
-            position: absolute;
-            bottom: -3.5rem; left: -2rem;
-            font-family: 'Passion One', sans-serif;
-            font-weight: 900;
-            font-size: 20rem;
-            color: rgba(255,255,255,.018);
-            line-height: 1;
-            pointer-events: none;
-            user-select: none;
-        }
         .about-sec::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: url('./Brand Assets 2.0/background-pattern-logo-2k.png') center / 700px repeat;
-            opacity: 0.04;
+            z-index: 0;
+            background: url('./Brand Assets 2.0/background-pattern-logo-2k.png') center / 480px repeat;
+            opacity: 0.09;
             mix-blend-mode: multiply;
             pointer-events: none;
         }
@@ -615,6 +604,8 @@
             grid-template-columns: 1fr 1fr;
             gap: 5rem;
             align-items: center;
+            position: relative;
+            z-index: 2;
         }
         .about-content { display:flex; flex-direction:column; gap:1.5rem; }
 
@@ -1201,7 +1192,7 @@
             <div class="about-glow"></div>
             <img src="./Brand Assets 2.0/mascot-duo-no-text-2k-Photoroom.png" alt="Krave Brothers Mascots" class="about-mascot">
             <div class="chef-quote">
-                <p>"THE SECRET IS IN THE SMASH — AND WE'RE NOT TELLING."</p>
+                <p>THE SECRET IS IN THE SMASH — AND WE'RE NOT TELLING.</p>
             </div>
         </div>
     </div>
