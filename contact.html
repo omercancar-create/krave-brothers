@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRAVE BROTHERS — Contact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800;1,900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --yellow:   #F5C400;
+            --yellow-lt:#FFD740;
+            --blue:     #0047AB;
+            --blue-dk:  #003080;
+            --white:    #FFFFFF;
+            --cream:    #FFFBF0;
+            --ink:      #1A1A1A;
+            --gray:     #666666;
+            --gray-lt:  #999999;
+            --bdl:      rgba(0,71,171,0.15);
+            --bdd:      rgba(255,255,255,0.12);
+            --nav-h:    100px;
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; font-size:16px; }
+        body { background:var(--cream); color:var(--ink); font-family:'Barlow',sans-serif; overflow-x:hidden; }
+        img  { max-width:100%; display:block; }
+        a    { text-decoration:none; color:inherit; }
+
+        /* ===========================
+           NAV
+        =========================== */
+        .nav {
+            position: fixed; inset:0 0 auto; height:var(--nav-h);
+            padding:0 5%; z-index:1000; background:var(--blue);
+            transition:background .3s,box-shadow .3s;
+        }
+        .nav.scrolled { background:var(--blue-dk); box-shadow:0 4px 24px rgba(0,0,0,.2); }
+        .nav-inner {
+            max-width:1400px; margin:0 auto; height:100%;
+            display:flex; align-items:center; justify-content:space-between;
+        }
+        .nav-logo  { height:90px; width:auto; }
+        .nav-links { display:flex; align-items:center; gap:2.5rem; list-style:none; }
+        .nav-links a {
+            font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:.95rem;
+            letter-spacing:.1em; text-transform:uppercase; color:var(--white); opacity:.75; transition:opacity .2s;
+        }
+        .nav-links a:hover, .nav-links a.active { opacity:1; }
+        .nav-cta {
+            background:var(--yellow) !important; color:var(--ink) !important;
+            padding:.55rem 1.35rem !important; opacity:1 !important; font-weight:800 !important;
+            clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+            transition:background .2s,transform .2s !important;
+        }
+        .nav-cta:hover { background:var(--yellow-lt) !important; transform:translateY(-2px); }
+
+        .nav-ham {
+            display:none; flex-direction:column; gap:5px;
+            cursor:pointer; background:none; border:none; padding:4px;
+        }
+        .nav-ham span { width:26px; height:2px; background:var(--white); display:block; }
+
+        /* ===========================
+           MOBILE MENU
+        =========================== */
+        .mob-menu {
+            display:none; position:fixed; inset:0; background:var(--blue-dk); z-index:999;
+            flex-direction:column; align-items:center; justify-content:center; gap:2.5rem;
+            transform:translateX(100%); transition:transform .4s cubic-bezier(.77,0,.18,1);
+        }
+        .mob-menu.open { transform:translateX(0); }
+        .mob-close {
+            position:absolute; top:1.5rem; right:5%;
+            background:none; border:none; color:var(--white); font-size:1.8rem; cursor:pointer;
+        }
+        .mob-links { list-style:none; text-align:center; }
+        .mob-links li + li { margin-top:1.5rem; }
+        .mob-links a {
+            font-family:'Passion One',sans-serif; font-weight:700; font-size:4rem;
+            letter-spacing:.04em; color:var(--white); transition:color .2s;
+        }
+        .mob-links a:hover { color:var(--yellow); }
+
+        /* ===========================
+           PAGE HEADER — yellow + pattern
+        =========================== */
+        .page-header {
+            background: var(--yellow);
+            padding: calc(var(--nav-h) + 4rem) 5% 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: url('./Brand Assets 1.0/background-pattern-2k.png') center / 420px repeat;
+            opacity: 1;
+            mix-blend-mode: multiply;
+        }
+        .page-header-inner {
+            max-width: 1400px; margin: 0 auto;
+            position: relative; z-index: 2;
+            display: flex; flex-direction: column; gap: 1rem;
+        }
+        .page-label {
+            display: inline-flex; align-items: center; gap: .7rem;
+            font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+            font-size: 1rem; letter-spacing: .18em; text-transform: uppercase; color: var(--blue);
+        }
+        .page-label::after {
+            content: ''; display: block; width: 38px; height: 2px; background: var(--blue);
+        }
+        .page-title {
+            font-family: 'Passion One', sans-serif; font-weight: 900;
+            font-size: clamp(4rem, 10vw, 8rem); line-height: .9;
+            letter-spacing: .02em;
+        }
+        .page-title .white { color: var(--white); display: block; }
+        .page-title .blue  { color: var(--blue);  display: block; }
+
+        /* ===========================
+           MARQUEE
+        =========================== */
+        .marquee { background:var(--white); overflow:hidden; padding:.75rem 0; border-top:2px solid var(--bdl); border-bottom:2px solid var(--bdl); }
+        .marquee-track { display:flex; white-space:nowrap; animation:marquee 22s linear infinite; }
+        .marquee-item {
+            display:inline-flex; align-items:center; gap:1.4rem; padding:0 1.8rem;
+            font-family:'Passion One',sans-serif; font-weight:400; font-size:1.25rem;
+            letter-spacing:.07em; color:var(--blue);
+        }
+        .marquee-dot { width:6px; height:6px; border-radius:50%; background:var(--yellow); flex-shrink:0; }
+        @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+        /* ===========================
+           MAIN CONTENT
+        =========================== */
+        .contact-sec {
+            padding: 6rem 5%;
+            background: var(--cream);
+        }
+        .contact-inner {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+        }
+
+        /* ===========================
+           FORM SIDE
+        =========================== */
+        .form-side { display: flex; flex-direction: column; gap: 2rem; }
+
+        .form-heading {
+            font-family: 'Passion One', sans-serif; font-weight: 900;
+            font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1;
+            color: var(--blue-dk);
+        }
+        .form-heading span { color: var(--blue); }
+
+        .form-sub {
+            font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem;
+            font-weight: 500; color: var(--gray); line-height: 1.65;
+            margin-top: -.5rem;
+        }
+
+        form { display: flex; flex-direction: column; gap: 1.2rem; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+        .form-group { display: flex; flex-direction: column; gap: .45rem; }
+
+        .form-label {
+            font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+            font-size: .78rem; letter-spacing: .15em; text-transform: uppercase;
+            color: var(--blue-dk);
+        }
+
+        .form-input, .form-select, .form-textarea {
+            background: var(--white);
+            border: 2px solid var(--bdl);
+            color: var(--ink);
+            font-family: 'Barlow', sans-serif;
+            font-size: .95rem;
+            padding: .85rem 1rem;
+            outline: none;
+            width: 100%;
+            transition: border-color .2s, box-shadow .2s;
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(0,71,171,.08);
+        }
+        .form-input::placeholder, .form-textarea::placeholder { color: var(--gray-lt); }
+
+        .form-select { cursor: pointer; appearance: none; -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230047AB' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+        .form-select option { background: var(--white); color: var(--ink); }
+
+        .form-textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
+
+        .btn-submit {
+            display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+            background: var(--blue); color: var(--white);
+            font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+            font-size: 1rem; letter-spacing: .1em; text-transform: uppercase;
+            padding: 1rem 2.5rem; border: none; cursor: pointer; width: 100%;
+            clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+            transition: background .2s, transform .2s, box-shadow .2s;
+        }
+        .btn-submit:hover {
+            background: var(--blue-dk); transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(0,71,171,.25);
+        }
+
+        .form-success {
+            display: none; padding: 1.2rem 1.4rem;
+            background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.3);
+            border-radius: 4px;
+            font-family: 'Barlow Condensed', sans-serif; font-size: 1rem;
+            font-weight: 600; color: #166534;
+        }
+
+        /* ===========================
+           INFO SIDE
+        =========================== */
+        .info-side {
+            display: flex; flex-direction: column; gap: 0;
+            background: var(--blue); padding: 3rem;
+            clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+            position: relative; overflow: hidden;
+        }
+        .info-side::before {
+            content: '';
+            position: absolute; inset: 0; z-index: 0;
+            background: url('./Brand Assets 2.0/background-pattern-logo-2k.png') center / 480px repeat;
+            opacity: 0.07; mix-blend-mode: multiply; pointer-events: none;
+        }
+        .info-inner { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 2.5rem; }
+
+        .info-heading {
+            font-family: 'Passion One', sans-serif; font-weight: 900;
+            font-size: 2.5rem; color: var(--white); line-height: 1;
+        }
+        .info-heading span { color: var(--yellow); }
+
+        .info-block { display: flex; flex-direction: column; gap: .4rem; }
+
+        .info-lbl {
+            font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+            font-size: .78rem; letter-spacing: .2em; text-transform: uppercase;
+            color: var(--yellow);
+        }
+        .info-val {
+            font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem;
+            font-weight: 500; color: rgba(255,255,255,.85); line-height: 1.6;
+        }
+        .info-val a { color: rgba(255,255,255,.85); transition: color .2s; }
+        .info-val a:hover { color: var(--yellow); }
+
+        .info-divider {
+            height: 1px; background: rgba(255,255,255,.12); margin: .5rem 0;
+        }
+
+        .hours-list { display: flex; flex-direction: column; gap: .3rem; }
+        .hours-row {
+            display: flex; justify-content: space-between;
+            font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 500;
+            padding: .4rem 0; border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+        .hours-row:last-child { border-bottom: none; }
+        .hours-day { color: rgba(255,255,255,.65); }
+        .hours-time { color: var(--white); font-weight: 700; }
+
+        .info-mascot {
+            max-width: 160px; margin-top: .5rem; mix-blend-mode: lighten;
+        }
+
+        /* ===========================
+           FOOTER
+        =========================== */
+        .footer { background:var(--blue-dk); border-top:1px solid rgba(245,196,0,.25); padding:4rem 5% 2.5rem; }
+        .footer-inner { max-width:1400px; margin:0 auto; }
+        .footer-top {
+            display:grid; grid-template-columns:2fr 1fr 1fr; gap:4rem;
+            padding-bottom:3rem; border-bottom:1px solid var(--bdd);
+        }
+        .f-brand  { display:flex; flex-direction:column; gap:1rem; }
+        .f-logo   { width:240px; height:auto; }
+        .f-tagline {
+            font-family:'Barlow Condensed',sans-serif; font-style:italic; font-weight:600;
+            font-size:1.05rem; color:rgba(255,255,255,.58); max-width:260px; line-height:1.55;
+        }
+        .f-col-title {
+            font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:.82rem;
+            letter-spacing:.15em; text-transform:uppercase; color:var(--yellow); margin-bottom:1.2rem;
+        }
+        .f-links { list-style:none; display:flex; flex-direction:column; gap:.75rem; }
+        .f-links a {
+            font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:500;
+            color:rgba(255,255,255,.55); letter-spacing:.04em; transition:color .2s;
+        }
+        .f-links a:hover { color:var(--yellow); }
+        .socials { display:flex; gap:.7rem; }
+        .soc-link {
+            width:40px; height:40px; border:1px solid rgba(255,255,255,.18);
+            display:flex; align-items:center; justify-content:center;
+            clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));
+            transition:border-color .2s,background .2s;
+        }
+        .soc-link:hover { border-color:var(--yellow); background:rgba(245,196,0,.1); }
+        .soc-link svg { width:17px; height:17px; fill:rgba(255,255,255,.5); transition:fill .2s; }
+        .soc-link:hover svg { fill:var(--yellow); }
+        .footer-bottom {
+            padding-top:2rem; display:flex; align-items:center; justify-content:space-between;
+        }
+        .f-copy { font-family:'Barlow Condensed',sans-serif; font-size:.85rem; color:rgba(255,255,255,.35); }
+        .f-copy .hl { color:var(--yellow); }
+
+        /* ===========================
+           RESPONSIVE
+        =========================== */
+        @media (max-width: 1024px) {
+            .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+            .f-brand { grid-column: 1 / -1; }
+        }
+        @media (max-width: 768px) {
+            :root { --nav-h: 72px; }
+            .nav-links { display: none; }
+            .nav-ham   { display: flex; }
+            .mob-menu  { display: flex; }
+            .nav-logo  { height: 58px; }
+            .form-row  { grid-template-columns: 1fr; }
+            .footer-top    { grid-template-columns: 1fr; gap: 1.5rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .f-logo        { width: 180px; }
+            .info-side     { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+    <button class="mob-close" id="mobClose">✕</button>
+    <ul class="mob-links">
+        <li><a href="index.html" onclick="closeMob()">Home</a></li>
+        <li><a href="menu.html" onclick="closeMob()">Menu</a></li>
+        <li><a href="index.html#about" onclick="closeMob()">Our Story</a></li>
+        <li><a href="index.html#location" onclick="closeMob()">Location</a></li>
+    </ul>
+    <a href="menu.html" class="nav-cta" onclick="closeMob()" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;padding:.9rem 2rem;">Menu →</a>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="index.html" aria-label="KRAVE BROTHERS Home">
+            <img src="./Brand Assets 2.0/logo-cows-on-text-2k-Photoroom.png" alt="Krave Brothers" class="nav-logo">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">Our Story</a></li>
+            <li><a href="index.html#location">Location</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+            <li><a href="menu.html" class="nav-cta">Menu →</a></li>
+        </ul>
+        <button class="nav-ham" id="ham" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+    <div class="page-header-inner">
+        <div class="page-label">Krave Brothers</div>
+        <h1 class="page-title">
+            <span class="white">GET IN</span>
+            <span class="blue">TOUCH</span>
+        </h1>
+    </div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+        <span class="marquee-item">SMASH BURGERS <span class="marquee-dot"></span></span>
+        <span class="marquee-item">CRISPY EDGES <span class="marquee-dot"></span></span>
+        <span class="marquee-item">FRESH BEEF DAILY <span class="marquee-dot"></span></span>
+        <span class="marquee-item">STREET VIBES <span class="marquee-dot"></span></span>
+        <span class="marquee-item">KRAVE BROTHERS <span class="marquee-dot"></span></span>
+        <span class="marquee-item">NEVER FROZEN <span class="marquee-dot"></span></span>
+        <span class="marquee-item">DOUBLE DOWN <span class="marquee-dot"></span></span>
+        <span class="marquee-item">SMASH BURGERS <span class="marquee-dot"></span></span>
+        <span class="marquee-item">CRISPY EDGES <span class="marquee-dot"></span></span>
+        <span class="marquee-item">FRESH BEEF DAILY <span class="marquee-dot"></span></span>
+        <span class="marquee-item">STREET VIBES <span class="marquee-dot"></span></span>
+        <span class="marquee-item">KRAVE BROTHERS <span class="marquee-dot"></span></span>
+        <span class="marquee-item">NEVER FROZEN <span class="marquee-dot"></span></span>
+        <span class="marquee-item">DOUBLE DOWN <span class="marquee-dot"></span></span>
+    </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact-sec">
+    <div class="contact-inner">
+
+        <!-- FORM -->
+        <div class="form-side">
+            <div>
+                <h2 class="form-heading">SEND US A<br><span>MESSAGE</span></h2>
+                <p class="form-sub">Got a question, catering enquiry, or just want to say hey? Drop us a line and we'll get back to you.</p>
+            </div>
+
+            <form id="contactForm" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="firstName">First Name *</label>
+                        <input class="form-input" type="text" id="firstName" name="firstName" placeholder="John" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="lastName">Last Name *</label>
+                        <input class="form-input" type="text" id="lastName" name="lastName" placeholder="Smith" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address *</label>
+                    <input class="form-input" type="email" id="email" name="email" placeholder="john@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="phone">Phone Number</label>
+                    <input class="form-input" type="tel" id="phone" name="phone" placeholder="(03) 0000 0000">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="subject">Reason for Contact *</label>
+                    <select class="form-select" id="subject" name="subject" required>
+                        <option value="" disabled selected>Select a reason…</option>
+                        <option value="general">General Enquiry</option>
+                        <option value="catering">Catering</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="media">Press & Media</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="message">Message *</label>
+                    <textarea class="form-textarea" id="message" name="message" placeholder="Tell us what's on your mind…" required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Send Message →</button>
+
+                <div class="form-success" id="formSuccess">
+                    ✓ Message sent! We'll get back to you within 24 hours.
+                </div>
+            </form>
+        </div>
+
+        <!-- INFO -->
+        <div class="info-side">
+            <div class="info-inner">
+                <h3 class="info-heading">FIND<br><span>US HERE</span></h3>
+
+                <div class="info-block">
+                    <div class="info-lbl">Address</div>
+                    <div class="info-val">123 Smash Street<br>Fitzroy, VIC 3065</div>
+                </div>
+
+                <div class="info-divider"></div>
+
+                <div class="info-block">
+                    <div class="info-lbl">Phone</div>
+                    <div class="info-val"><a href="tel:0391234567">(03) 9123 4567</a></div>
+                </div>
+
+                <div class="info-block">
+                    <div class="info-lbl">Email</div>
+                    <div class="info-val"><a href="mailto:hello@kravebrothers.com">hello@kravebrothers.com</a></div>
+                </div>
+
+                <div class="info-divider"></div>
+
+                <div class="info-block">
+                    <div class="info-lbl">Hours</div>
+                    <div class="hours-list">
+                        <div class="hours-row">
+                            <span class="hours-day">Mon – Thu</span>
+                            <span class="hours-time">11AM – 10PM</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Friday</span>
+                            <span class="hours-time">11AM – 11PM</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Saturday</span>
+                            <span class="hours-time">10AM – 11PM</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Sunday</span>
+                            <span class="hours-time">10AM – 9PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <img src="./Brand Assets 2.0/mascot-cap-cow-2k-Photoroom.png" alt="Krave Brothers Mascot" class="info-mascot">
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="f-brand">
+                <img src="./Brand Assets 2.0/logo-horizontal-2k-Photoroom.png" alt="Krave Brothers" class="f-logo">
+                <p class="f-tagline">Perfectly smashed. Never frozen. Always legendary.</p>
+            </div>
+            <div>
+                <div class="f-col-title">Quick Links</div>
+                <ul class="f-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="index.html#about">Our Story</a></li>
+                    <li><a href="index.html#location">Location</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="f-col-title">Follow Us</div>
+                <div class="socials">
+                    <a href="#" class="soc-link" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="#" class="soc-link" aria-label="TikTok">
+                        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                    </a>
+                    <a href="#" class="soc-link" aria-label="Linktree">
+                        <svg viewBox="0 0 24 24"><path d="M13.051 0h-2.102L8.29 4.388 5.35 0H3.25l3.902 5.828L3.1 11.63h2.08l2.986-4.45 2.986 4.45h2.08L9.19 5.828zm-1.05 13.12H9.999V24h2.002z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="f-copy">© 2026 <span class="hl">KRAVE BROTHERS</span>. All rights reserved.</p>
+            <p class="f-copy">Fresh. Never Frozen. Always <span class="hl">Legendary</span>.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    const ham     = document.getElementById('ham');
+    const mobMenu = document.getElementById('mobMenu');
+    const mobClose= document.getElementById('mobClose');
+
+    ham.addEventListener('click', () => {
+        if (mobMenu.classList.contains('open')) { closeMob(); }
+        else { mobMenu.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    });
+    mobClose.addEventListener('click', closeMob);
+    function closeMob() { mobMenu.classList.remove('open'); document.body.style.overflow = ''; }
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const required = this.querySelectorAll('[required]');
+        let valid = true;
+        required.forEach(field => {
+            if (!field.value.trim()) {
+                field.style.borderColor = '#ef4444';
+                valid = false;
+                setTimeout(() => { field.style.borderColor = ''; }, 2000);
+            }
+        });
+        if (valid) {
+            this.querySelectorAll('.form-input,.form-select,.form-textarea').forEach(f => f.value = '');
+            document.getElementById('formSuccess').style.display = 'block';
+            setTimeout(() => { document.getElementById('formSuccess').style.display = 'none'; }, 5000);
+        }
+    });
+</script>
+</body>
+</html>
