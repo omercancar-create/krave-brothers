@@ -385,36 +385,6 @@
             50%      { transform: rotate(-4deg) scale(1.06); }
         }
 
-        /* Scroll hint — blue on yellow */
-        .scroll-hint {
-            position: absolute;
-            bottom: 2.5rem; left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: .4rem;
-            opacity: .4;
-            z-index: 3;
-        }
-        .scroll-hint span {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: .65rem;
-            letter-spacing: .22em;
-            text-transform: uppercase;
-            color: var(--blue-dk);
-        }
-        .scroll-line {
-            width: 1px; height: 40px;
-            background: var(--blue);
-            animation: scroll-anim 1.6s ease-in-out infinite;
-        }
-        @keyframes scroll-anim {
-            0%   { transform: scaleY(0); transform-origin: top; }
-            50%  { transform: scaleY(1); transform-origin: top; }
-            51%  { transform: scaleY(1); transform-origin: bottom; }
-            100% { transform: scaleY(0); transform-origin: bottom; }
-        }
 
         /* ===========================
            MARQUEE — blue with white text
@@ -1165,10 +1135,6 @@
         </div>
     </div>
 
-    <div class="scroll-hint">
-        <span>Scroll</span>
-        <div class="scroll-line"></div>
-    </div>
 </section>
 
 <!-- MARQUEE -->
