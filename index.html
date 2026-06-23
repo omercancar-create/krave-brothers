@@ -389,7 +389,7 @@
         /* ===========================
            MARQUEE — blue with white text
         =========================== */
-        .marquee { background: var(--white); overflow: hidden; padding: .75rem 0; border-top: 2px solid var(--bdl); border-bottom: 2px solid var(--bdl); }
+        .marquee { background: var(--blue); overflow: hidden; padding: .75rem 0; }
         .marquee-track {
             display: flex;
             white-space: nowrap;
@@ -404,7 +404,7 @@
             font-weight: 400;
             font-size: 1.25rem;
             letter-spacing: .07em;
-            color: var(--blue);
+            color: var(--white);
         }
         .marquee-dot {
             width: 6px; height: 6px;
@@ -602,12 +602,18 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
+            grid-template-areas:
+                "top    mascot"
+                "obsess vals";
+            column-gap: 5rem;
+            row-gap: 2.5rem;
             position: relative;
             z-index: 2;
         }
-        .about-content { display:flex; flex-direction:column; gap:1.5rem; }
+        .about-top        { grid-area: top;    display: flex; flex-direction: column; gap: 1.5rem; align-self: center; }
+        .about-visual     { grid-area: mascot; align-self: center; }
+        .about-obsession  { grid-area: obsess; align-self: center; }
+        .values           { grid-area: vals;   align-self: center; display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
 
         .about-title {
             font-family: 'Passion One', sans-serif;
@@ -1001,14 +1007,21 @@
             .tab-btn    { font-size: .9rem; padding: .8rem 1.1rem; white-space: nowrap; }
             .menu-grid  { grid-template-columns: 1fr; }
 
-            /* About — side by side on mobile: text left, mascot right */
-            .about-inner  { grid-template-columns: 3fr 2fr; gap: 1rem; align-items: start; }
-            .about-visual { order: 0; }
+            /* About — 2×2 collapses to mobile grid */
+            .about-inner  {
+                grid-template-columns: 3fr 2fr;
+                grid-template-areas:
+                    "top    mascot"
+                    "obsess obsess"
+                    "vals   vals";
+                column-gap: 1rem;
+                row-gap: 1.5rem;
+            }
             .about-mascot { max-width: 150px; margin: 0; }
             .about-glow   { display: none; }
             .chef-quote   { display: none; }
             .about-title  { font-size: clamp(2.5rem, 10vw, 4rem); }
-            .values       { grid-template-columns: 1fr; }
+            .values       { grid-template-columns: 1fr 1fr; }
 
             /* Titles */
             .sec-title    { font-size: clamp(2.5rem, 11vw, 4rem); }
@@ -1150,47 +1163,23 @@
 <!-- ABOUT -->
 <section class="about-sec" id="about">
     <div class="about-inner">
-        <div class="about-content rv">
-            <div class="sec-label">Our Story</div>
 
+        <!-- TOP LEFT: label + TWO BROTHERS + body -->
+        <div class="about-top rv">
+            <div class="sec-label">Our Story</div>
             <h2 class="about-title">
                 TWO<br>
-                <span class="yb">BROTHERS.</span><br>
-                ONE<br>
-                <span class="yb">OBSESSION.</span>
+                <span class="yb">BROTHERS.</span>
             </h2>
-
             <p class="about-body">
                 It started with a cast iron pan, a block of fresh beef, and a bet. Two brothers — one with a chef's hat, one with a cap — decided that <strong>the perfect smash burger didn't exist yet.</strong> So they made it.
             </p>
             <p class="about-body">
                 We source fresh, never-frozen beef every single day. We bake our own brioche buns. We make every sauce from scratch. We don't cut corners — <strong>we smash them.</strong>
             </p>
-
-            <div class="values">
-                <div class="val">
-                    <div class="val-icon">🥩</div>
-                    <div class="val-title">Fresh Daily</div>
-                    <div class="val-desc">Beef ground and delivered every morning. No freezers. No compromises. Ever.</div>
-                </div>
-                <div class="val">
-                    <div class="val-icon">🧀</div>
-                    <div class="val-title">Real Cheese</div>
-                    <div class="val-desc">American singles, gruyère, smoked gouda — the real stuff, always, no exceptions.</div>
-                </div>
-                <div class="val">
-                    <div class="val-icon">🍞</div>
-                    <div class="val-title">House Buns</div>
-                    <div class="val-desc">Brioche baked in-house daily. The bun is not an afterthought. Not here.</div>
-                </div>
-                <div class="val">
-                    <div class="val-icon">🔥</div>
-                    <div class="val-title">Smash Technique</div>
-                    <div class="val-desc">Maximum crust, maximum flavour. Every single patty, every single time.</div>
-                </div>
-            </div>
         </div>
 
+        <!-- TOP RIGHT: mascot -->
         <div class="about-visual rv rv-d2">
             <div class="about-glow"></div>
             <img src="./Brand Assets 2.0/mascot-duo-no-text-2k-Photoroom.png" alt="Krave Brothers Mascots" class="about-mascot">
@@ -1198,6 +1187,39 @@
                 <p>THE SECRET IS IN THE SMASH — AND WE'RE NOT TELLING.</p>
             </div>
         </div>
+
+        <!-- BOTTOM LEFT: ONE OBSESSION -->
+        <div class="about-obsession rv rv-d1">
+            <h2 class="about-title">
+                ONE<br>
+                <span class="yb">OBSESSION.</span>
+            </h2>
+        </div>
+
+        <!-- BOTTOM RIGHT: values -->
+        <div class="values rv rv-d2">
+            <div class="val">
+                <div class="val-icon">🥩</div>
+                <div class="val-title">Fresh Daily</div>
+                <div class="val-desc">Beef ground and delivered every morning. No freezers. No compromises. Ever.</div>
+            </div>
+            <div class="val">
+                <div class="val-icon">🧀</div>
+                <div class="val-title">Real Cheese</div>
+                <div class="val-desc">American singles, gruyère, smoked gouda — the real stuff, always, no exceptions.</div>
+            </div>
+            <div class="val">
+                <div class="val-icon">🍞</div>
+                <div class="val-title">House Buns</div>
+                <div class="val-desc">Brioche baked in-house daily. The bun is not an afterthought. Not here.</div>
+            </div>
+            <div class="val">
+                <div class="val-icon">🔥</div>
+                <div class="val-title">Smash Technique</div>
+                <div class="val-desc">Maximum crust, maximum flavour. Every single patty, every single time.</div>
+            </div>
+        </div>
+
     </div>
 </section>
 

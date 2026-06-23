@@ -89,7 +89,10 @@
         =========================== */
         .page-header {
             background: var(--yellow);
-            padding: calc(var(--nav-h) + 4rem) 5% 4rem;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            padding: calc(var(--nav-h) + 3rem) 5% 4rem;
             position: relative;
             overflow: hidden;
         }
@@ -101,21 +104,13 @@
             mix-blend-mode: multiply;
         }
         .page-header-inner {
-            max-width: 1400px; margin: 0 auto;
+            max-width: 1400px; margin: 0 auto; width: 100%;
             position: relative; z-index: 2;
-            display: flex; flex-direction: column; gap: 1rem;
-        }
-        .page-label {
-            display: inline-flex; align-items: center; gap: .7rem;
-            font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-            font-size: 1rem; letter-spacing: .18em; text-transform: uppercase; color: var(--blue);
-        }
-        .page-label::after {
-            content: ''; display: block; width: 38px; height: 2px; background: var(--blue);
+            display: flex; flex-direction: column; gap: 1.5rem;
         }
         .page-title {
             font-family: 'Passion One', sans-serif; font-weight: 900;
-            font-size: clamp(4rem, 10vw, 8rem); line-height: .9;
+            font-size: clamp(5rem, 10vw, 9rem); line-height: .88;
             letter-spacing: .02em;
         }
         .page-title .white { color: var(--white); display: block; }
@@ -124,12 +119,12 @@
         /* ===========================
            MARQUEE
         =========================== */
-        .marquee { background:var(--white); overflow:hidden; padding:.75rem 0; border-top:2px solid var(--bdl); border-bottom:2px solid var(--bdl); }
+        .marquee { background:var(--blue); overflow:hidden; padding:.75rem 0; }
         .marquee-track { display:flex; white-space:nowrap; animation:marquee 22s linear infinite; }
         .marquee-item {
             display:inline-flex; align-items:center; gap:1.4rem; padding:0 1.8rem;
             font-family:'Passion One',sans-serif; font-weight:400; font-size:1.25rem;
-            letter-spacing:.07em; color:var(--blue);
+            letter-spacing:.07em; color:var(--white);
         }
         .marquee-dot { width:6px; height:6px; border-radius:50%; background:var(--yellow); flex-shrink:0; }
         @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
@@ -153,8 +148,8 @@
 
         .form-heading {
             font-family: 'Passion One', sans-serif; font-weight: 900;
-            font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1;
-            color: var(--blue-dk);
+            font-size: clamp(3.5rem, 5.5vw, 5.5rem); line-height: 1;
+            color: var(--blue);
         }
         .form-heading span { color: var(--blue); }
 
@@ -364,7 +359,6 @@
             <img src="./Brand Assets 2.0/logo-cows-on-text-2k-Photoroom.png" alt="Krave Brothers" class="nav-logo">
         </a>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
             <li><a href="index.html#about">Our Story</a></li>
             <li><a href="index.html#location">Location</a></li>
             <li><a href="contact.html" class="active">Contact</a></li>
@@ -379,7 +373,6 @@
 <!-- PAGE HEADER -->
 <header class="page-header">
     <div class="page-header-inner">
-        <div class="page-label">Krave Brothers</div>
         <h1 class="page-title">
             <span class="white">GET IN</span>
             <span class="blue">TOUCH</span>
@@ -511,7 +504,6 @@
                     </div>
                 </div>
 
-                <img src="./Brand Assets 2.0/mascot-cap-cow-2k-Photoroom.png" alt="Krave Brothers Mascot" class="info-mascot">
             </div>
         </div>
 
