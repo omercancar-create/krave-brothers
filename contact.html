@@ -61,7 +61,10 @@
             display:none; flex-direction:column; gap:5px;
             cursor:pointer; background:none; border:none; padding:4px;
         }
-        .nav-ham span { width:26px; height:2px; background:var(--white); display:block; }
+        .nav-ham span { width:26px; height:2px; background:var(--white); display:block; transition:transform .3s, opacity .3s; }
+        .nav-ham.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+        .nav-ham.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+        .nav-ham.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
 
         /* ===========================
            MOBILE MENU
@@ -563,10 +566,10 @@
 
     ham.addEventListener('click', () => {
         if (mobMenu.classList.contains('open')) { closeMob(); }
-        else { mobMenu.classList.add('open'); document.body.style.overflow = 'hidden'; }
+        else { mobMenu.classList.add('open'); ham.classList.add('open'); document.body.style.overflow = 'hidden'; }
     });
     mobClose.addEventListener('click', closeMob);
-    function closeMob() { mobMenu.classList.remove('open'); document.body.style.overflow = ''; }
+    function closeMob() { mobMenu.classList.remove('open'); ham.classList.remove('open'); document.body.style.overflow = ''; }
 
     document.getElementById('contactForm').addEventListener('submit', function(e) {
         e.preventDefault();
